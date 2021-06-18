@@ -1,4 +1,4 @@
-# pokedex_clube_petro
+# pokedex_club_petro
 
 A new Flutter project.
 
