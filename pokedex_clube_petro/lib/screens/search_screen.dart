@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex_clube_petro/models/pokemon_evolution_chain.dart';
 import 'package:pokedex_clube_petro/stores/pokemon_api_store.dart';
+import 'package:pokedex_clube_petro/utils/app_routes.dart';
 import 'package:pokedex_clube_petro/utils/constants.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -124,13 +125,18 @@ class _SearchScreenState extends State<SearchScreen> {
                               fontSize: 12 * sFX,
                             ),
                           ),
-                          // style: ButtonStyle(
-                          //   padding: MaterialStateProperty<EdgeInsets>.resolveWith((states) => null),
-                          // ),
-                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                          ),
+                          onPressed: () {
+                            _pokemonApiStore!.pokemonName =
+                                _pokemonEvolutionChain!.chain!.species!.name!;
+                            Navigator.of(context)
+                                .pushNamed(AppRoutes.SEARCH_RESULTS);
+                          },
                         ),
                         _pokemonEvolutionChain!.chain!.evolvesTo!.isEmpty
-                            ? Text('Não possui 1ª evolução')
+                            ? Text('')
                             : TextButton(
                                 child: Text(
                                   _inCaps(_pokemonEvolutionChain!
@@ -140,11 +146,20 @@ class _SearchScreenState extends State<SearchScreen> {
                                     fontSize: 12 * sFX,
                                   ),
                                 ),
-                                onPressed: () {},
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                ),
+                                onPressed: () {
+                                  _pokemonApiStore!.pokemonName =
+                                      _pokemonEvolutionChain!
+                                          .chain!.evolvesTo![0].species!.name!;
+                                  Navigator.of(context)
+                                      .pushNamed(AppRoutes.SEARCH_RESULTS);
+                                },
                               ),
                         _pokemonEvolutionChain!
                                 .chain!.evolvesTo![0].evolvesTo!.isEmpty
-                            ? Text('Não possui 2ª evolução')
+                            ? Text('')
                             : TextButton(
                                 child: Text(
                                   _inCaps(_pokemonEvolutionChain!
@@ -158,12 +173,28 @@ class _SearchScreenState extends State<SearchScreen> {
                                     fontSize: 12 * sFX,
                                   ),
                                 ),
-                                onPressed: () {},
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                ),
+                                onPressed: () {
+                                  _pokemonApiStore!.pokemonName =
+                                      _pokemonEvolutionChain!
+                                          .chain!
+                                          .evolvesTo![0]
+                                          .evolvesTo![0]
+                                          .species!
+                                          .name!;
+                                  Navigator.of(context)
+                                      .pushNamed(AppRoutes.SEARCH_RESULTS);
+                                },
                               ),
                       ],
                     );
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return Padding(
+                      padding: EdgeInsets.only(top: 50 * sFY),
+                      child: Center(child: CircularProgressIndicator()),
+                    );
                   }
                 },
               ),

@@ -21,7 +21,7 @@ abstract class _PokemonApiStoreBase with Store {
   String? pokemonName;
 
   @observable
-  List<PokemonDetail>? favoritePokemonDetailList;
+  List<PokemonDetail>? favoritePokemonDetailList = [];
 
   @action
   fetchPokemonDetail() {
@@ -36,8 +36,8 @@ abstract class _PokemonApiStoreBase with Store {
     favoritePokemonNamesList.forEach((pokemonFavoriteName) {
       _loadPokemonDetails(pokemonFavoriteName).then((_pokemonDetailResponse) {
         pokemonDetail = _pokemonDetailResponse;
+        favoritePokemonDetailList!.add(pokemonDetail!);
       });
-      favoritePokemonDetailList!.add(pokemonDetail!);
     });
   }
 

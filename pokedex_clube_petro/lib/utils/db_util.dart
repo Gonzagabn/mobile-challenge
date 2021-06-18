@@ -35,8 +35,8 @@ class DbUtil {
     final db = await DbUtil.database();
     await db.query(
       table,
-      where: 'name = ?',
-      whereArgs: [data],
+      // where: 'name = ?',
+      // whereArgs: [data],
     );
   }
 

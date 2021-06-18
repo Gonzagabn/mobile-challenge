@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex_clube_petro/components/pokedex_led.dart';
 import 'package:pokedex_clube_petro/components/shadow_container.dart';
+import 'package:pokedex_clube_petro/stores/favorites_store.dart';
 import 'package:pokedex_clube_petro/stores/pokemon_api_store.dart';
 import 'package:pokedex_clube_petro/utils/app_routes.dart';
 import 'package:pokedex_clube_petro/utils/constants.dart';
@@ -17,6 +18,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   PokemonApiStore? _pokemonApiStore;
+  FavoritesStore? _favoritesStore;
+
   bool _isSearchButtonEnabled = false;
   TextEditingController _textController = TextEditingController();
 
@@ -24,6 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _pokemonApiStore = GetIt.instance<PokemonApiStore>();
+    _favoritesStore = GetIt.instance<FavoritesStore>();
+    _favoritesStore!.loadFavoritePokemonNames();
   }
 
   @override

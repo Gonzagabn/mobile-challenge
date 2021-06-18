@@ -55,6 +55,7 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
         leading: IconButton(
           icon: Icon(Icons.close_rounded),
           onPressed: () {
+            // _pokemonApiStore!.pokemonName = null;
             Navigator.of(context).pop();
           },
         ),
@@ -227,28 +228,48 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
                                       color: Constants.RED,
                                     ),
                                   ),
-                                  Text(
-                                    _inCaps(_pokemonEvolutionChain!
-                                        .chain!.evolvesTo![0].species!.name!),
-                                    style: TextStyle(
-                                      fontSize: 16 * sFX,
-                                      fontWeight: FontWeight.bold,
-                                      color: Constants.RED,
-                                    ),
-                                  ),
-                                  Text(
-                                    _inCaps(_pokemonEvolutionChain!
-                                        .chain!
-                                        .evolvesTo![0]
-                                        .evolvesTo![0]
-                                        .species!
-                                        .name!),
-                                    style: TextStyle(
-                                      fontSize: 16 * sFX,
-                                      fontWeight: FontWeight.bold,
-                                      color: Constants.RED,
-                                    ),
-                                  ),
+                                  _pokemonEvolutionChain!
+                                          .chain!.evolvesTo!.isEmpty
+                                      ? Text(
+                                          '-',
+                                          style: TextStyle(
+                                            fontSize: 16 * sFX,
+                                            fontWeight: FontWeight.bold,
+                                            color: Constants.RED,
+                                          ),
+                                        )
+                                      : Text(
+                                          _inCaps(_pokemonEvolutionChain!.chain!
+                                              .evolvesTo![0].species!.name!),
+                                          style: TextStyle(
+                                            fontSize: 16 * sFX,
+                                            fontWeight: FontWeight.bold,
+                                            color: Constants.RED,
+                                          ),
+                                        ),
+                                  _pokemonEvolutionChain!.chain!.evolvesTo![0]
+                                          .evolvesTo!.isEmpty
+                                      ? Text(
+                                          '-',
+                                          style: TextStyle(
+                                            fontSize: 16 * sFX,
+                                            fontWeight: FontWeight.bold,
+                                            color: Constants.RED,
+                                          ),
+                                        )
+                                      : Text(
+                                          _inCaps(_pokemonEvolutionChain!
+                                              .chain!
+                                              .evolvesTo![0]
+                                              .evolvesTo![0]
+                                              .species!
+                                              .name!),
+                                          style: TextStyle(
+                                            fontSize: 16 * sFX,
+                                            fontWeight: FontWeight.bold,
+                                            color: Constants.RED,
+                                          ),
+                                        ),
                                   SizedBox(height: 32 * sFY),
                                   Text(
                                     'Status base',
